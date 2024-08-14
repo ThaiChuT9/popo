@@ -8,27 +8,18 @@
 <body>
     <?php include_once("nav.php") ?>
 
-    <?php 
-        $conn = new mysqli("localhost", "root", "", "yessir");
-        if ($conn->connect_error) {
-          die("Connection failed: " . $conn->connect_error);
-        }
+    <?php
+    require_once("./functions/db.php");
+    $conn = connect();
+    if (isset($_GET['s'])) {
+      $searchQuery = $conn->real_escape_string($_GET['s']);
+      $sql = "SELECT * FROM `products` WHERE `name` LIKE '%$searchQuery%'";
+    } else {
+      $sql = "SELECT * FROM `products`";
+    }
+    $products = select($sql);
 
-        // Check if a search query is provided
-        if (isset($_GET['s'])) {
-            $searchQuery = $conn->real_escape_string($_GET['s']);
-            $sql = "SELECT * FROM `products` WHERE `name` LIKE '%$searchQuery%'";
-        } else {
-            $sql = "SELECT * FROM `products`";
-        }
-
-        $result = $conn->query($sql);
-        $products = [];
-        if ($result->num_rows > 0) {
-          while ($row = $result->fetch_assoc()) {
-            $products[] = $row;
-          }
-        }
+    
     ?>
 
     <div class="container">
@@ -42,7 +33,7 @@
                           <h5 class="card-title"><?php echo htmlspecialchars($item["name"]) ?></h5>
                           <p>$<?php echo htmlspecialchars($item["price"]) ?></p>
                           <p class="card-text"><?php echo htmlspecialchars($item["description"]) ?></p>
-                          <a href="#" class="btn btn-primary">Detail</a>
+                          <a href="product.php?id=<?php echo $item['product_id']; ?>" class="btn btn-primary">Detail</a>
                         </div>
                       </div>
                     </div>

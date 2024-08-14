@@ -1,16 +1,7 @@
 <?php
-$conn = new mysqli("localhost", "root", "", "yessir");
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
-}
+require_once "./functions/db.php";
 $sql = "SELECT * FROM `categories`";
-$result = $conn->query($sql);
-$categories = [];
-if ($result->num_rows > 0) {
-  while ($row = $result->fetch_assoc()) {
-    $categories[] = $row;
-  }
-}
+$categories = select($sql);
 ?>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
