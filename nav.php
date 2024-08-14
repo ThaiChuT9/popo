@@ -1,8 +1,8 @@
 <?php
-require_once "./functions/db.php";
-$sql = "SELECT * FROM `categories`";
-$categories = select($sql);
+session_start();
 $cart = isset($_SESSION["cart"])?$_SESSION["cart"]:[];
+require_once "./functions/db.php";
+$categories = select("SELECT * FROM `categories`");
 ?>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
@@ -22,7 +22,7 @@ $cart = isset($_SESSION["cart"])?$_SESSION["cart"]:[];
         <input name="s" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Search</button>
       </form>
-      <a href="/cart.php" class="btn btn-outline-dark ms-1">
+      <a href="#" class="btn btn-outline-dark ms-1">
         <i class="bi bi-cart"></i>
         <span class="badge rounded-pill text-bg-dark"><?php echo count($cart);?></span>
       </a>

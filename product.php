@@ -24,16 +24,20 @@ $products = select($sql);
             <?php else: ?>
                 <p>Out of Stock</p>
             <?php endif; ?>
-        <?php endforeach; ?>
-        <div class="row">
+            <div class="row">
             <div class="col-3">
                 <form class="d-flex" action="addtocart.php" method="post">
-                    <input name="buy_qty" class="form-control me-2" type="number" value="1" placeholder="Quantity"
+                    <div class="input-group">
+                        <input type="hidden" name="id" value="<?php echo $product["product_id"];?>"/>
+                        <input name="buy_qty" class="form-control me-2" type="number" value="1" placeholder="Quantity"
                         aria-label="">
-                    <button class="btn btn-outline-warning" type="submit">Add to cart</button>
+                        <button class="btn btn-outline-warning" type="submit">Add to cart</button>
+                    </div>
                 </form>
             </div>
         </div>
+        <?php endforeach; ?>
+       
     </div>
 </body>
 
