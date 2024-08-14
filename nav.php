@@ -2,6 +2,7 @@
 require_once "./functions/db.php";
 $sql = "SELECT * FROM `categories`";
 $categories = select($sql);
+$cart = isset($_SESSION["cart"])?$_SESSION["cart"]:[];
 ?>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
@@ -13,7 +14,7 @@ $categories = select($sql);
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <?php foreach ($categories as $category): ?>
           <li class="nav-item">
-            <a class="nav-link" href="category.php?id=<?php echo $category['cat_id']; ?>"><?php echo htmlspecialchars($category['cat_name']); ?></a>
+            <a style="font-size: small;" class="nav-link" href="category.php?id=<?php echo $category['cat_id']; ?>"><?php echo htmlspecialchars($category['cat_name']); ?></a>
           </li>
         <?php endforeach; ?>
       </ul>
@@ -21,6 +22,10 @@ $categories = select($sql);
         <input name="s" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Search</button>
       </form>
+      <a href="/cart.php" class="btn btn-outline-dark ms-1">
+        <i class="bi bi-cart"></i>
+        <span class="badge rounded-pill text-bg-dark"><?php echo count($cart);?></span>
+      </a>
     </div>
   </div>
 </nav>

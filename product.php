@@ -27,7 +27,7 @@ $products = select($sql);
         <?php endforeach; ?>
         <div class="row">
             <div class="col-3">
-                <form class="d-flex" action="/addtocart.php" method="post">
+                <form class="d-flex" action="addtocart.php" method="post">
                     <input name="buy_qty" class="form-control me-2" type="number" value="1" placeholder="Quantity"
                         aria-label="">
                     <button class="btn btn-outline-warning" type="submit">Add to cart</button>
