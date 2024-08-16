@@ -1,10 +1,11 @@
 <?php
-require_once("./functions/db.php");
-$conn = connect();
-$id = $_GET['id'];
-$sql = "SELECT * FROM `products` WHERE product_id = $id";
-$products = select($sql);
+    require_once("./functions/db.php");
+    $conn = connect();
+    $id = $_GET['id'];
+    $sql = "SELECT * FROM `products` WHERE product_id = $id";
+    $products = select($sql);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
