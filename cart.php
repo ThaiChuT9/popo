@@ -49,9 +49,9 @@
                                 <?php foreach ($cartItems as $item): ?>
                                     <tr>
                                         <td><?= $item['name'] ?></td>
-                                        <td><?= $item['price'] ?></td>
+                                        <td>$<?= $item['price'] ?></td>
                                         <td><?= $item['quantity'] ?></td>
-                                        <td><?= $item['total'] ?></td>
+                                        <td>$<?= $item['total'] ?></td>
                                     </tr>
                                 <?php endforeach; ?>
                             <?php else: ?>
