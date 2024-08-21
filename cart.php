@@ -11,7 +11,7 @@
         $cartItems = [];
         if(!empty($cart)){
             $productIds = implode(',', array_keys($cart));
-            $sql = "SELECT product_id, name, price FROM `products` WHERE product_id IN ($productIds)";
+            $sql = "SELECT * FROM `products` WHERE product_id IN ($productIds)";
             $products = select($sql);
             foreach($products as $product){
                 $cartItems[] = [

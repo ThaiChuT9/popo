@@ -34,3 +34,12 @@ function findById($sql){
     }
     return null;
 }
+function insert($sql)
+{
+    $conn = connect();
+    if ($conn->query($sql) === TRUE) {
+        $last_id = $conn->insert_id;
+        return $last_id;
+    }
+    return null;
+}
