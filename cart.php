@@ -5,26 +5,8 @@
     <title>Cart</title>
     <?php 
         session_start();
-        require_once("./functions/db.php");
-        $conn = connect();
-        $cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
-        $cartItems = [];
-        if(!empty($cart)){
-            $productIds = implode(',', array_keys($cart));
-            $sql = "SELECT * FROM `products` WHERE product_id IN ($productIds)";
-            $products = select($sql);
-            foreach($products as $product){
-                $cartItems[] = [
-                    'product_id' => $product['product_id'],
-                    'name' => $product['name'],
-                    'price' => $product['price'],
-                    'quantity' => $cart[$product['product_id']],
-                    'total' => $cart[$product['product_id']] * $product['price']
-                ];
-            }
-        }
-
-
+        require_once("./functions/cart.php");
+        $cartItems = getCartItems();
     ?>
 </head>
 <body>
@@ -46,11 +28,11 @@
                         </thead>
                         <tbody>
                             <?php if (!empty($cartItems)): ?>
-                                <?php foreach ($cartItems as $item): ?>
+                                <?php foreach ($cartItems as $index =>$item): ?>
                                     <tr>
                                         <td><?= $item['name'] ?></td>
                                         <td>$<?= $item['price'] ?></td>
-                                        <td><?= $item['quantity'] ?></td>
+                                        <td><?= $item['buy_qty'] ?></td>
                                         <td>$<?= $item['total'] ?></td>
                                     </tr>
                                 <?php endforeach; ?>
@@ -72,7 +54,7 @@
                                     echo htmlspecialchars('$'.$grandtotal);
                                 ?>
                             </p>
-                            <a href="#" class="btn btn-primary">Checkout</a>
+                            <a href="check_out.php" class="btn btn-primary">Checkout</a>
                             <a href="clear_cart.php" class="btn btn-danger">Clear Cart</a>
                         </div>
                     </div>
