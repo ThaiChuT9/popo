@@ -1,0 +1,1 @@
+<h1>Scam thành công. Chết cmm đi kakakakka</h1>

@@ -62,3 +62,26 @@ function get_access_token($client_id, $client_secret) {
       $result = json_decode($result, true);
       return $result;
   }
+
+  // Hàm thực hiện thanh toán
+function execute_payment($access_token, $payment_id, $payer_id) {
+  $ch = curl_init();
+  curl_setopt($ch, CURLOPT_URL, "https://api.sandbox.paypal.com/v1/payments/payment/$payment_id/execute/");
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+  curl_setopt($ch, CURLOPT_POST, 1);
+  curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+  curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode(['payer_id' => $payer_id]));
+
+  $headers = array();
+  $headers[] = 'Content-Type: application/json';
+  $headers[] = 'Authorization: Bearer ' . $access_token;
+  curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+  $result = curl_exec($ch);
+  if (curl_errno($ch)) {
+      echo 'Error:' . curl_error($ch);
+  }
+  curl_close($ch);
+  $result = json_decode($result, true);
+  return $result;
+}
