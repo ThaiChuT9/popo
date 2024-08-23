@@ -63,7 +63,7 @@ function get_access_token($client_id, $client_secret) {
       return $result;
   }
 
-  // Hàm thực hiện thanh toán
+// Hàm thực hiện thanh toán
 function execute_payment($access_token, $payment_id, $payer_id) {
   $ch = curl_init();
   curl_setopt($ch, CURLOPT_URL, "https://api.sandbox.paypal.com/v1/payments/payment/$payment_id/execute/");
