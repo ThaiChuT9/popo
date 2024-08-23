@@ -51,6 +51,18 @@ if ($order_id != null) {
              VALUES($order_id,$product_id, $buy_qty,$price)";
         insert($sql);
     }
+    // send email
+    $from_email = "chimtokolo@gg.com";
+    $header = "From: $from_email";
+    $subject = "Order Confirmation $order_id";
+    $message = "Thank you for your order!\n\n";
+    $message .= "Order ID: $order_id\n";
+    $message .= "Order Date: $now\n";
+    $message .= "Grand Total: $grand_total\n\n";
+    $message .= "Shipping Address: $shipping_address\n";
+    $message .= "Telephone: $telephone\n";
+    $message .= "Customer Name: $customer_name\n";
+    mail($email, $subject, $message, $header);
     if ($payment_method == "PAYPAL") {
         // PayPal configuration
         $client_id = "AZwKNLaFfdHYEHVMo68ScZzhue2u8eEoaH-4mX0n_nNfqA7xxEu93sRtSfHTP8vP1BLpez0HNT9qKnQg";
